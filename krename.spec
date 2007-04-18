@@ -1,6 +1,6 @@
 %define name	krename
-%define version	3.0.11
-%define release %mkrel 3
+%define version	3.0.14
+%define release %mkrel 1
 
 Summary:	A powerful batch renamer for KDE
 Name:		%{name}
@@ -12,7 +12,7 @@ Group:		Graphical desktop/KDE
 Source0: 	http://prdownloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
 
 BuildRequires:  kdelibs-devel 
-BuildRequires:  mandriva-create-kde-mdk-menu
+BuildRequires:  desktop-file-utils
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 
@@ -67,8 +67,14 @@ CFLAGS="%optflags" CXXFLAGS="%optflags" \
 rm -rf $RPM_BUILD_ROOT
 %{makeinstall_std}
 
-install -d $RPM_BUILD_ROOT%{_menudir}
-kdedesktop2mdkmenu.pl %{name} "Applications/File tools" $RPM_BUILD_ROOT%{_datadir}/applications/kde/krename.desktop $RPM_BUILD_ROOT%{_menudir}/%{name} kde
+desktop-file-install --vendor="" \
+  --remove-category="Application" \
+  --add-category="X-MandrivaLinux-System-FileTools" \
+  --add-category="System" \
+  --add-category="FileManager" \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications/kde $RPM_BUILD_ROOT%{_datadir}/applications/kde/*
+
+
 install -m644 $RPM_BUILD_ROOT%{_iconsdir}/locolor/16x16/apps/%{name}.png -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
 install -m644 $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
 install -m644 $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
@@ -107,6 +113,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-%{_menudir}/%{name}
-%{_datadir}/services/krename_dir.desktop
-%{_datadir}/services/krenameservicemenu.desktop
+%{_datadir}/apps/konqueror/servicemenus/krename_dir.desktop
+%{_datadir}/apps/konqueror/servicemenus/krenameservicemenu.desktop
