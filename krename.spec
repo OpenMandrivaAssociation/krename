@@ -39,9 +39,6 @@ export KDEDIR=%_prefix
 
 export LD_LIBRARY_PATH=$QTDIR/%_lib:$KDEDIR/%_lib:$LD_LIBRARY_PATH
 export PATH=$QTDIR/bin:$KDEDIR/bin:$PATH
-# Search for qt/kde libraries in the right directories (avoid patch)
-# NOTE: please don't regenerate configure scripts below
-perl -pi -e "s@/lib(\"|\b[^/])@/%_lib\1@g if /(kde|qt)_(libdirs|libraries)=/" configure
 
 CFLAGS="%optflags" CXXFLAGS="%optflags" \
 ./configure	--prefix=%{_prefix} \
