@@ -35,7 +35,6 @@ modification dates, permissions, and file ownership.
 %build
 make -f admin/Makefile.common cvs
 
-export QTDIR=%_prefix/%_lib/qt3
 export KDEDIR=%_prefix
 
 export LD_LIBRARY_PATH=$QTDIR/%_lib:$KDEDIR/%_lib:$LD_LIBRARY_PATH
