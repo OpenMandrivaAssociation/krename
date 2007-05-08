@@ -12,7 +12,7 @@ Group:		Graphical desktop/KDE
 Source0: 	http://prdownloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
 
 BuildRequires:  kdelibs-devel 
-BuildRequires:  desktop-file-utils
+BuildRequires:  mandriva-create-kde-mdk-menu
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 
@@ -30,55 +30,28 @@ modification dates, permissions, and file ownership.
 
 %prep
 
-%setup -q -n%name-%{version}
+%setup -q
 
 %build
 make -f admin/Makefile.common cvs
 
-export KDEDIR=%_prefix
+export QTDIR=%{_prefix}/lib/qt3/%{_lib}
 
-export LD_LIBRARY_PATH=$QTDIR/%_lib:$KDEDIR/%_lib:$LD_LIBRARY_PATH
-export PATH=$QTDIR/bin:$KDEDIR/bin:$PATH
-
-CFLAGS="%optflags" CXXFLAGS="%optflags" \
-./configure	--prefix=%{_prefix} \
-		--libdir=%{_libdir} \
-		--mandir=%{_mandir} \
-		--datadir=%{_datadir} \
-		--disable-debug \
-		--enable-mt \
-		--enable-shared \
-		--disable-static \
-		--disable-objprelink \
-		--with-pic \
-		--with-gnu-ld \
-		--disable-rpath \
-		--disable-embedded \
-		--enable-fast-install=yes \
-		--with-xineramai\
-		--enable-final
+%configure2_5x	--enable-final \
+		--disable-rpath
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %{makeinstall_std}
 
-desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --add-category="X-MandrivaLinux-System-FileTools" \
-  --add-category="System" \
-  --add-category="FileManager" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications/kde $RPM_BUILD_ROOT%{_datadir}/applications/kde/*
-
-
-install -m644 $RPM_BUILD_ROOT%{_iconsdir}/locolor/16x16/apps/%{name}.png -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
-install -m644 $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
-install -m644 $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
+install -m644 %{buildroot}%{_iconsdir}/locolor/16x16/apps/%{name}.png -D %{buildroot}%{_miconsdir}/%{name}.png
+install -m644 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png -D %{buildroot}%{_iconsdir}/%{name}.png
+install -m644 %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png -D %{buildroot}%{_liconsdir}/%{name}.png
 
 %find_lang %{name}
 
 %post
-%update_menus
 %if %mdkversion > 200600
 %{update_desktop_database}
 %update_icon_cache locolor
@@ -86,14 +59,13 @@ install -m644 $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png -D $RPM
 %endif
 
 %postun
-%clean_menus
 %if %mdkversion > 200600
 %clean_icon_cache locolor
 %clean_icon_cache hicolor
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files -f %{name}.lang 
 %defattr(-,root,root)
@@ -109,5 +81,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-%{_datadir}/apps/konqueror/servicemenus/krename_dir.desktop
-%{_datadir}/apps/konqueror/servicemenus/krenameservicemenu.desktop
+%{_datadir}/apps/konqueror/servicemenus/*
