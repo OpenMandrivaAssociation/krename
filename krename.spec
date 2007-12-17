@@ -13,7 +13,6 @@ Source0: 	http://prdownloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
 
 BuildRequires:  kdelibs-devel 
 BuildRequires:  mandriva-create-kde-mdk-menu
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 
 %description
