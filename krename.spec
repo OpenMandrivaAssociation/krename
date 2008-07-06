@@ -1,20 +1,18 @@
 %define name	krename
-%define version	3.0.14
+%define version	3.9.1
 %define release %mkrel 1
 
 Summary:	A powerful batch renamer for KDE
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2+
 Url:		http://www.krename.net/
 Group:		Graphical desktop/KDE
 Source0: 	http://prdownloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
-
-BuildRequires:  kdelibs-devel 
-BuildRequires:  mandriva-create-kde-mdk-menu
+BuildRequires:  kdelibs4-devel
+BuildRequires:	taglib-devel
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
 
 %description
 Krename is a very powerful batch file renamer for KDE3
@@ -29,27 +27,19 @@ the filename, and many more. It can also change access and
 modification dates, permissions, and file ownership.
 
 %prep
-
 %setup -q
 
 %build
-make -f admin/Makefile.common cvs
-
-export QTDIR=%{_prefix}/lib/qt3/%{_lib}
-
-%configure2_5x	--enable-final \
-		--disable-rpath
+%cmake_kde4
 %make
 
 %install
 rm -rf %{buildroot}
+cd build
 %{makeinstall_std}
+cd -
 
-install -m644 %{buildroot}%{_iconsdir}/locolor/16x16/apps/%{name}.png -D %{buildroot}%{_miconsdir}/%{name}.png
-install -m644 %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png -D %{buildroot}%{_iconsdir}/%{name}.png
-install -m644 %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png -D %{buildroot}%{_liconsdir}/%{name}.png
-
-%find_lang %{name}
+%find_lang %{name} --with-html
 
 %post
 %if %mdkversion > 200600
@@ -69,16 +59,6 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang 
 %defattr(-,root,root)
-%doc %{_docdir}/HTML/*/%{name}
-%doc AUTHORS ChangeLog INSTALL README
-%{_bindir}/%{name}
-%{_datadir}/applications/kde/krename.desktop
-%{_datadir}/apps/%{name}
-%{_iconsdir}/locolor/16x16/apps/%{name}.png
-%{_iconsdir}/locolor/32x32/apps/%{name}.png
-%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-%{_miconsdir}/%{name}.png
-%{_iconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
-%{_datadir}/apps/konqueror/servicemenus/*
+%doc AUTHORS README
+%{_kde_bindir}/%{name}
+%{_kde_appsdir}/dolphin/servicemenus/*.desktop
