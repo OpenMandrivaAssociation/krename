@@ -15,7 +15,7 @@ BuildRequires:	taglib-devel
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-Krename is a very powerful batch file renamer for KDE3
+Krename is a very powerful batch file renamer for KDE4
 which can rename a list of files based on a set of expressions.
 It can copy/move the files to another directory or simply 
 rename the input files.
