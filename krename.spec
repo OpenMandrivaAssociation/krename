@@ -1,5 +1,5 @@
 %define name	krename
-%define version	3.9.1
+%define version	3.9.2
 %define release %mkrel 1
 
 Summary:	A powerful batch renamer for KDE
@@ -35,24 +35,9 @@ modification dates, permissions, and file ownership.
 
 %install
 rm -rf %{buildroot}
-cd build
-%{makeinstall_std}
-cd -
+%{makeinstall_std} -C build
 
 %find_lang %{name} --with-html
-
-%post
-%if %mdkversion > 200600
-%{update_desktop_database}
-%update_icon_cache locolor
-%update_icon_cache hicolor
-%endif
-
-%postun
-%if %mdkversion > 200600
-%clean_icon_cache locolor
-%clean_icon_cache hicolor
-%endif
 
 %clean
 rm -rf %{buildroot}
@@ -62,3 +47,5 @@ rm -rf %{buildroot}
 %doc AUTHORS README
 %{_kde_bindir}/%{name}
 %{_kde_appsdir}/dolphin/servicemenus/*.desktop
+%{_kde_applicationsdir}/*.desktop
+%{_kde_iconsdir}/*/*/apps/*.png
