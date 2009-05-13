@@ -1,6 +1,6 @@
 %define name	krename
 %define version	3.9.2
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary:	A powerful batch renamer for KDE
 Name:		%{name}
@@ -10,6 +10,7 @@ License:	GPLv2+
 Url:		http://www.krename.net/
 Group:		Graphical desktop/KDE
 Source0: 	http://prdownloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
+Patch0:		krename-r87.patch
 BuildRequires:  kdelibs4-devel
 BuildRequires:	taglib-devel
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -28,6 +29,7 @@ modification dates, permissions, and file ownership.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %cmake_kde4
@@ -46,6 +48,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc AUTHORS README
 %{_kde_bindir}/%{name}
-%{_kde_appsdir}/dolphin/servicemenus/*.desktop
+%{_kde_services}/ServiceMenus/*.desktop
 %{_kde_applicationsdir}/*.desktop
 %{_kde_iconsdir}/*/*/apps/*.png
