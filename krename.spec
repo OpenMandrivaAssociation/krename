@@ -12,6 +12,7 @@ Group:		Graphical desktop/KDE
 Source0: 	http://prdownloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
 BuildRequires:  kdelibs4-devel
 BuildRequires:	taglib-devel
+BuildRequires:	libexiv-devel
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
