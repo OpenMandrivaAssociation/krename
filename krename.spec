@@ -32,7 +32,7 @@ modification dates, permissions, and file ownership.
 
 %build
 %cmake_kde4
-%make
+make
 
 %install
 rm -rf %{buildroot}
