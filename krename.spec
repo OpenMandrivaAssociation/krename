@@ -1,6 +1,6 @@
 %define name	krename
 %define version	4.0.4
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary:	A powerful batch renamer for KDE
 Name:		%{name}
@@ -32,7 +32,7 @@ modification dates, permissions, and file ownership.
 
 %build
 %cmake_kde4
-make
+%make
 
 %install
 rm -rf %{buildroot}
