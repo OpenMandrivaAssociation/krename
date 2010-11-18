@@ -1,6 +1,6 @@
 %define name	krename
-%define version	4.0.4
-%define release %mkrel 2
+%define version	4.0.5
+%define release %mkrel 1
 
 Summary:	A powerful batch renamer for KDE
 Name:		%{name}
