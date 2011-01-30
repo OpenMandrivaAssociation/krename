@@ -1,6 +1,6 @@
 %define name	krename
-%define version	4.0.5
-%define release %mkrel 2
+%define version	4.0.6
+%define release %mkrel 1
 
 Summary:	A powerful batch renamer for KDE
 Name:		%{name}
@@ -9,7 +9,7 @@ Release:	%{release}
 License:	GPLv2+
 Url:		http://www.krename.net/
 Group:		Graphical desktop/KDE
-Source0: 	http://prdownloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
+Source0: 	http://downloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
 BuildRequires:  kdelibs4-devel
 BuildRequires:	taglib-devel
 BuildRequires:	libexiv-devel
