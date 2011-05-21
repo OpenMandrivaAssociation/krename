@@ -1,6 +1,6 @@
 %define name	krename
 %define version	4.0.7
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary:	A powerful batch renamer for KDE
 Name:		%{name}
@@ -14,6 +14,8 @@ BuildRequires:  kdelibs4-devel
 BuildRequires:	taglib-devel
 BuildRequires:	libexiv-devel
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
+Patch0:		krename-4.0.7-static-init-crash.patch 
 
 %description
 Krename is a very powerful batch file renamer for KDE4
@@ -29,6 +31,12 @@ modification dates, permissions, and file ownership.
 
 %prep
 %setup -q
+%patch0 -p1
+for file in TODO; do
+    iconv -f iso8859-1 -t utf8 $file > $file.utf8
+    rm -rf $file
+    mv $file.utf8 $file
+done
 
 %build
 %cmake_kde4
