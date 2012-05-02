@@ -1,20 +1,24 @@
 Summary:	A powerful batch renamer for KDE
 Name:		krename
 Version:	4.0.9
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	A powerful batch renamer for KDE
 License:	GPLv2+
 Url:		http://www.krename.net/
 Group:		Graphical desktop/KDE
 Source0: 	http://downloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
-BuildRequires:  kdelibs4-devel
+Patch0:		krename-4.0.9-rus.patch
+Patch1:		krename-4.0.9-desktop-rus.patch
+Patch2:		krename-4.0.9-podofo.patch
+BuildRequires:	kdelibs4-devel
+BuildRequires:	podofo-devel
 BuildRequires:	taglib-devel
-BuildRequires:	libexiv-devel
+BuildRequires:	pkgconfig(exiv2)
 
 %description
 Krename is a very powerful batch file renamer for KDE4
 which can rename a list of files based on a set of expressions.
-It can copy/move the files to another directory or simply 
+It can copy/move the files to another directory or simply
 rename the input files.
 prename supports many conversion operations, including
 conversion of a filename to lowercase or to uppercase,
@@ -25,6 +29,9 @@ modification dates, permissions, and file ownership.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 for file in TODO; do
     iconv -f iso8859-1 -t utf8 $file > $file.utf8
     rm -rf $file
@@ -45,7 +52,6 @@ done
 %__rm -rf %{buildroot}
 
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc AUTHORS README
 %{_kde_bindir}/%{name}
 %{_kde_services}/ServiceMenus/*.desktop
