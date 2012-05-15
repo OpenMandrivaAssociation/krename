@@ -1,7 +1,7 @@
 Summary:	A powerful batch renamer for KDE
 Name:		krename
 Version:	4.0.9
-Release:	%mkrel 2
+Release:	%mkrel 3
 Summary:	A powerful batch renamer for KDE
 License:	GPLv2+
 Url:		http://www.krename.net/
