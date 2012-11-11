@@ -1,0 +1,18 @@
+diff -urN krename-4.0.9/src/servicemenus/krename_all_nonrec.desktop krename-4.0.9-patched/src/servicemenus/krename_all_nonrec.desktop
+--- krename-4.0.9/src/servicemenus/krename_all_nonrec.desktop	2011-06-24 22:14:13.000000000 +1100
++++ krename-4.0.9-patched/src/servicemenus/krename_all_nonrec.desktop	2012-05-02 20:49:20.175606976 +1100
+@@ -16,4 +16,5 @@
+ Name[lt]=Pervadinti su KRename
+ Name[pl]=Zmień nazwę za pomocą KRename
+ Name[pt_BR]=Renomear com KRename
++Name[ru]=Переименовать с помощью KRename
+ Name[uk]=Перейменувати з KRename
+diff -urN krename-4.0.9/src/servicemenus/krename_dir_rec.desktop krename-4.0.9-patched/src/servicemenus/krename_dir_rec.desktop
+--- krename-4.0.9/src/servicemenus/krename_dir_rec.desktop	2011-06-24 22:14:13.000000000 +1100
++++ krename-4.0.9-patched/src/servicemenus/krename_dir_rec.desktop	2012-05-02 20:49:41.979620759 +1100
+@@ -16,4 +16,5 @@
+ Name[lt]=Pervadinti su KRename (su pokatalogiais)
+ Name[pl]=Zmień nazwę za pomocą KRename (z podkatalogami)
+ Name[pt_BR]=Renomear com KRename
++Name[ru]=Переименовать с помощью KRename (с подкаталогами)
+ Name[uk]=Перейменувати з KRename 
