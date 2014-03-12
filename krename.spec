@@ -14,6 +14,7 @@ BuildRequires:	kdelibs4-devel
 BuildRequires:	podofo-devel
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(taglib)
+BuildRequires:	pkgconfig(freetype2)
 
 %description
 Krename is a very powerful batch file renamer for KDE4 which can rename a list
