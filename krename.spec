@@ -10,6 +10,7 @@ Patch0:		krename-4.0.9-rus.patch
 Patch1:		krename-4.0.9-desktop-rus.patch
 Patch2:		krename-4.0.9-podofo.patch
 Patch3:		krename-4.0.9-cmake.patch
+Patch4:		krename-4.0.9-includedir.patch
 BuildRequires:	kdelibs4-devel
 BuildRequires:	podofo-devel
 BuildRequires:	pkgconfig(exiv2)
@@ -38,10 +39,7 @@ permissions, and file ownership.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%apply_patches
 for file in TODO; do
     iconv -f iso8859-1 -t utf8 $file > $file.utf8
     rm -rf $file

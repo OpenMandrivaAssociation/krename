@@ -1,0 +1,10 @@
+--- krename-4.0.9/CMakeLists.txt~	2012-01-02 01:38:26.000000000 +0800
++++ krename-4.0.9/CMakeLists.txt	2013-01-19 09:09:13.629913669 +0800
+@@ -56,6 +56,7 @@
+ macro_log_feature(FREETYPE_FOUND "FreeType2" "A library to access font metadata" "http://www.freetype.org" FALSE "")
+ IF(FREETYPE_FOUND)
+   ADD_DEFINITIONS( -DWITH_FREETYPE )
++  INCLUDE_DIRECTORIES(${FREETYPE_INCLUDE_DIRS})
+   MESSAGE("-- The freetype library was found. KRename will be built with freetype support.")
+ ELSE(FREETYPE_FOUND)
+   MESSAGE("-- The freetype library was not found. KRename will not be built with freetype support.")
