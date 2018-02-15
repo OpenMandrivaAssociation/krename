@@ -1,24 +1,40 @@
 Summary:	A powerful batch renamer for KDE
 Name:		krename
-Version:	4.0.9
-Release:	4
+Version:	5.0.0
+Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		http://www.krename.net/
-Source0:	http://downloads.sourceforge.net/krename/%{name}-%{version}.tar.bz2
-Patch0:		krename-4.0.9-rus.patch
-Patch1:		krename-4.0.9-desktop-rus.patch
-Patch2:		krename-4.0.9-podofo.patch
-Patch3:		krename-4.0.9-cmake.patch
-Patch4:		krename-4.0.9-includedir.patch
-BuildRequires:	kdelibs4-devel
+Source0:	http://download.kde.org/stable/krename/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	podofo-devel
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(taglib)
 BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	ninja
+BuildRequires:	cmake(ECM)
+BuildRequires:	cmake(Qt5Core)
+BuildRequires:	cmake(Qt5Gui)
+BuildRequires:	cmake(Qt5Widgets)
+BuildRequires:	cmake(Qt5)
+BuildRequires:	cmake(KF5Completion)
+BuildRequires:	cmake(KF5Config)
+BuildRequires:	cmake(KF5CoreAddons)
+BuildRequires:	cmake(KF5Crash)
+BuildRequires:	cmake(Gettext)
+BuildRequires:	cmake(PythonInterp)
+BuildRequires:	cmake(KF5I18n)
+BuildRequires:	cmake(KF5IconThemes)
+BuildRequires:	cmake(KF5ItemViews)
+BuildRequires:	cmake(KF5JobWidgets)
+BuildRequires:	cmake(KF5JS)
+BuildRequires:	cmake(KF5KIO)
+BuildRequires:	cmake(KF5Service)
+BuildRequires:	cmake(KF5WidgetsAddons)
+BuildRequires:	cmake(KF5XmlGui)
+BuildRequires:	cmake(KF5)
 
 %description
-Krename is a very powerful batch file renamer for KDE4 which can rename a list
+Krename is a very powerful batch file renamer for KF5 which can rename a list
 of files based on a set of expressions. It can copy/move the files to another
 directory or simply rename the input files.
 
@@ -29,11 +45,12 @@ filename, and many more. It can also change access and modification dates,
 permissions, and file ownership.
 
 %files -f %{name}.lang
-%doc AUTHORS README
-%{_kde_bindir}/%{name}
-%{_kde_services}/ServiceMenus/*.desktop
-%{_kde_applicationsdir}/*.desktop
-%{_kde_iconsdir}/*/*/apps/*.png
+%doc AUTHORS README.md
+%{_kde5_bindir}/%{name}
+%{_kde5_iconsdir}/*/*/apps/*.png
+%{_kde5_services}/ServiceMenus/*.desktop
+%{_datadir}/applications/org.kde.krename.desktop
+%{_datadir}/metainfo/org.kde.krename.appdata.xml
 
 #----------------------------------------------------------------------------
 
@@ -47,11 +64,11 @@ for file in TODO; do
 done
 
 %build
-%cmake_kde4
-%make
+%cmake_kde5
+%ninja
 
 %install
-%makeinstall_std -C build
+%ninja_install -C build
 
 %find_lang %{name} --with-html
 

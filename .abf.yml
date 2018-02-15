@@ -1,2 +1,4 @@
+removed_sources:
+  krename-4.0.9.tar.bz2: 03886a385a16de4c9bc285d25b9816ea97768c9e
 sources:
-  "krename-4.0.9.tar.bz2": 03886a385a16de4c9bc285d25b9816ea97768c9e
+  krename-5.0.0.tar.xz: 7e9f87ed44f877b3bb84b4d5efe81bd4eb40ada4
