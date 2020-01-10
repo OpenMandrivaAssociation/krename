@@ -57,7 +57,7 @@ permissions, and file ownership.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 for file in TODO; do
     iconv -f iso8859-1 -t utf8 $file > $file.utf8
     rm -rf $file
