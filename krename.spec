@@ -34,6 +34,7 @@ BuildRequires:	cmake(KF5Service)
 BuildRequires:	cmake(KF5WidgetsAddons)
 BuildRequires:	cmake(KF5XmlGui)
 BuildRequires:	cmake(KF5)
+BuildRequires:	locales-extra-charsets
 
 %description
 Krename is a very powerful batch file renamer for KF5 which can rename a list
