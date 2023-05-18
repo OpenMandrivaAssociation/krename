@@ -1,0 +1,12 @@
+diff -up krename-5.0.2/src/exiv2plugin.cpp.omv~ krename-5.0.2/src/exiv2plugin.cpp
+--- krename-5.0.2/src/exiv2plugin.cpp.omv~	2023-05-18 06:15:31.065170814 +0200
++++ krename-5.0.2/src/exiv2plugin.cpp	2023-05-18 06:15:36.760205265 +0200
+@@ -395,7 +395,7 @@ QString Exiv2Plugin::processFile(BatchRe
+     std::string strFilename(asc.constData(), asc.length());
+ 
+     try {
+-        Image::AutoPtr image = Exiv2::ImageFactory::open(strFilename);
++        Image::UniquePtr image = Exiv2::ImageFactory::open(strFilename);
+         if (image.get() != nullptr && image->good()) {
+             image->readMetadata();
+ 
