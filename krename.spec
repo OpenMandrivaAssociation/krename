@@ -1,12 +1,17 @@
+%define git 20230809
+
 Summary:	A powerful batch renamer for KDE
 Name:		krename
-Version:	5.0.2
-Release:	1
+Version:	5.0.3
+Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		http://www.krename.net/
+%if 0%{?git:1}
+Source0:	https://invent.kde.org/utilities/krename/-/archive/master/krename-master.tar.bz2
+%else
 Source0:	http://download.kde.org/stable/krename/%{version}/src/%{name}-%{version}.tar.xz
-Patch0:		krename-5.0.2-exiv2-0.28.patch
+%endif
 BuildRequires:	podofo-devel
 BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(taglib)
@@ -51,14 +56,14 @@ permissions, and file ownership.
 %doc AUTHORS README.md
 %{_kde5_bindir}/%{name}
 %{_kde5_iconsdir}/*/*/apps/*.png
-%{_kde5_services}/ServiceMenus/*.desktop
 %{_datadir}/applications/org.kde.krename.desktop
+%{_datadir}/kio/servicemenus/*
 %{_datadir}/metainfo/org.kde.krename.appdata.xml
 
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-%{?git:master}%{!?git:%{version}}
 for file in TODO; do
     iconv -f iso8859-1 -t utf8 $file > $file.utf8
     rm -rf $file
