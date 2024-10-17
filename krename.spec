@@ -6,7 +6,7 @@ Version:	5.0.3
 Release:	%{?git:0.%{git}.}1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
-Url:		http://www.krename.net/
+Url:		https://www.krename.net/
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/utilities/krename/-/archive/master/krename-master.tar.bz2
 %else
