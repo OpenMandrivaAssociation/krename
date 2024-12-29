@@ -3,7 +3,7 @@
 Summary:	A powerful batch renamer for KDE
 Name:		krename
 Version:	5.0.3
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		https://www.krename.net/
