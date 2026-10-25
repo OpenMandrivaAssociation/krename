@@ -18,8 +18,6 @@ BuildRequires:	pkgconfig(exiv2)
 BuildRequires:	pkgconfig(taglib)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	ninja
-# %cmake_kde5 and %{_kde5_*} are in the Plasma 5 ECM package.
-# cmake(ECM) is the KF6 module and does not ship those macros.
 BuildRequires:	extra-cmake-modules-plasma5
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(Qt5Core)
