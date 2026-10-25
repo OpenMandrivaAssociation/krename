@@ -1,0 +1,35 @@
+--- a/src/podofoplugin.cpp	2026-10-25 20:26:42.756218223 +0100
++++ b/src/podofoplugin.cpp	2026-10-25 20:26:42.756247743 +0100
+@@ -49,19 +49,26 @@
+         doc.Load(filename.toUtf8().data());
+ #if (PODOFO_VERSION_MINOR>=10 || PODOFO_VERSION_MAJOR>=1)
+         const PdfInfo *info = doc.GetInfo();
++        // PoDoFo 1.0: PdfString::GetString() is a string_view and has no c_str().
++        auto pdfText = [](const nullable<const PdfString&> &value) -> QString {
++            if (!value.has_value())
++                return QString();
++            const auto text = value->GetString();
++            return QString::fromUtf8(text.data(), static_cast<int>(text.size()));
++        };
+ 
+         if (token == "pdfauthor") {
+-            return info->GetAuthor().has_value() ? QString::fromUtf8(info->GetAuthor()->GetString().c_str()) : QString();
++            return pdfText(info->GetAuthor());
+         } else if (token == "pdfcreator") {
+-            return info->GetCreator().has_value() ? QString::fromUtf8(info->GetCreator()->GetString().c_str()) : QString();
++            return pdfText(info->GetCreator());
+         } else if (token == "pdfkeywords") {
+-            return info->GetKeywords().has_value() ? QString::fromUtf8(info->GetKeywords()->GetString().c_str()) : QString();
++            return pdfText(info->GetKeywords());
+         } else if (token == "pdfsubject") {
+-            return info->GetSubject().has_value() ? QString::fromUtf8(info->GetSubject()->GetString().c_str()) : QString();
++            return pdfText(info->GetSubject());
+         } else if (token == "pdftitle") {
+-            return info->GetTitle().has_value() ? QString::fromUtf8(info->GetTitle()->GetString().c_str()) : QString();
++            return pdfText(info->GetTitle());
+         } else if (token == "pdfproducer") {
+-            return info->GetProducer().has_value() ? QString::fromUtf8(info->GetProducer()->GetString().c_str()) : QString();
++            return pdfText(info->GetProducer());
+         } else if (token == "pdfpages") {
+             return QString::number(doc.GetPages().GetCount());
+         }
